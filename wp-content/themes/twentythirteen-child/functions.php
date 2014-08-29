@@ -269,3 +269,11 @@ function custom_pagination($numpages = '', $pagerange = '', $paged='') {
     echo "</nav>";
   }
 }
+// Overiding attachment image width
+function vivelohoy_content_width() {
+  global $content_width;
+
+  if ( is_attachment() )
+    $content_width = 860;
+}
+add_action( 'template_redirect', 'vivelohoy_content_width', 11 );
