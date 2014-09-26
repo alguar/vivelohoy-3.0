@@ -105,6 +105,7 @@
 							<a style="float:left" href="<?php echo home_url() ?>"><img class="nav-logo" style="width: 35px; background: #F4F4F4; margin: 5px" src="<?php echo get_stylesheet_directory_uri();?>/images/square_logo.png"></a>
 						</div>
 						<div class="topmenu article-logo">
+							<a href="<?php echo home_url() ?>/wp-login.php?action=register" title="Registrar"><span class="genericon genericon-user" style="float: left"></span></a>
 							<a href="<?php echo home_url() ?>"><img class="nav-logo" src="<?php echo get_stylesheet_directory_uri();?>/assets/images/hoy-logo.png"></a>
 						</div>
 						<div class="bottomMenu nav-cat">

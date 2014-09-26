@@ -86,6 +86,7 @@
 						<a class="screen-reader-text skip-link" href="#main" title="Skip to content">Saltar al contenido</a>
 						<div>
 							<span id="hoy-menunav" class="genericon genericon-menu"></span>
+							<a href="<?php echo home_url() ?>/wp-login.php?action=register" title="Registrar"><span class="genericon genericon-user" style="float: left"></span></a>
 							<a href="#" id="hoy-searchnav"><span class="genericon genericon-search" style="float: right; margin: 6px 7px 0 2px; color: #000"></span></a>
 						
 							<?php get_search_form() ?>	
