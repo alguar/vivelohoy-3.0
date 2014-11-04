@@ -9,8 +9,7 @@ insertion. These files are found in ./inc/ads/.
 $AD_TAG_DEV = false;
 
 /*
- Override twentythirteen's $content_width to the width of our content
- as defined in style.css:
+  $content_width is the width of our content as defined in style.css:
 
     .entry-header,
     .entry-content,
@@ -26,8 +25,8 @@ $content_width = 860;
 	
 // Reset theme to only provide video and gallery post formats in addition to Standard (considered no format)
 // See http://codex.wordpress.org/Post_Formats#Formats_in_a_Child_Theme
-add_action( 'after_setup_theme', 'childtheme_formats', 11 );
-function childtheme_formats(){
+add_action( 'after_setup_theme', 'gabo_post_formats', 11 );
+function gabo_post_formats(){
      add_theme_support( 'post-formats', array( 'gallery' ) );
 }
 
@@ -73,7 +72,7 @@ add_filter('user_contactmethods','add_twitter_contactmethod',10,1);
 /**
  * Overiding post_nav function
  */
-function twentythirteen_post_nav() {
+function gabo_post_nav() {
 	global $post;
 
 	// Don't print empty markup if there's nowhere to navigate.
@@ -98,7 +97,7 @@ function twentythirteen_post_nav() {
  * Overiding paging_nav function
  */
 
-function twentythirteen_paging_nav() {
+function gabo_paging_nav() {
 	global $wp_query;
 
 	// Don't print empty markup if there's only one page.
@@ -126,21 +125,18 @@ function twentythirteen_paging_nav() {
  * Enqueue scripts and styles for the front end.
  *
  */
-function vivelohoy_scripts_styles() {
-  // Need to remove references to the main stylesheet created by the parent theme
-  wp_dequeue_style( 'twentythirteen-style' );
-  wp_deregister_style( 'twentythirteen-style' );
+function gabo_scripts_styles() {
   // Loads our main stylesheet with a version number associated with the last modified time.
   $stylesheet_last_modified = filemtime( get_stylesheet_directory() . '/style.css' );
-  wp_enqueue_style( 'twentythirteen-style', get_stylesheet_uri(), array(), $stylesheet_last_modified );
+  wp_enqueue_style( 'gabo-style', get_stylesheet_uri(), array(), $stylesheet_last_modified );
   // Load our stylesheet for the home loop
-  wp_enqueue_style( 'vivelohoy-home-loop', get_stylesheet_directory_uri() . '/css/home-loop.css',
+  wp_enqueue_style( 'gabo-home-loop', get_stylesheet_directory_uri() . '/css/home-loop.css',
                     array(), filemtime( get_stylesheet_directory() . '/css/home-loop.css' ) );
 
   // Add script for the nav changer
   wp_enqueue_script('nav-changer', get_stylesheet_directory_uri() . '/js/nav-changer.js', array('jquery'), '2014-08-26', true);
 	// Loads script for handling buttons on floating nav
-	wp_enqueue_script( 'hoy-navbuttons', get_stylesheet_directory_uri() . '/js/nav-buttons.js', array('jquery'), '2014-07-14', true );
+	wp_enqueue_script( 'gabo-navbuttons', get_stylesheet_directory_uri() . '/js/nav-buttons.js', array('jquery'), '2014-07-14', true );
 	// Add Genericons font, used in the main stylesheet.
 	wp_enqueue_style( 'genericons', get_stylesheet_directory_uri() . '/fonts/genericons.css', array(), '3.1' );
 	// Add custom Fontello font found at www.fontello.com
@@ -163,7 +159,7 @@ function vivelohoy_scripts_styles() {
   // Add dashicons to frontend
   wp_enqueue_style('dashicons');
 }
-add_action( 'wp_enqueue_scripts', 'vivelohoy_scripts_styles' );
+add_action( 'wp_enqueue_scripts', 'gabo_scripts_styles' );
 
 // Custom Editor Style CSS - Able to style TinyMCE
 function my_theme_add_editor_styles() {
@@ -172,14 +168,14 @@ function my_theme_add_editor_styles() {
 add_action( 'init', 'my_theme_add_editor_styles' );
 
 // Add support of other languages
-function vivelohoy_theme_setup(){
-    load_theme_textdomain('twentythirteen-child', get_stylesheet_directory() . '/languages');
+function gabo_theme_setup(){
+    load_theme_textdomain('gabo', get_stylesheet_directory() . '/languages');
 }
-add_action('after_setup_theme', 'vivelohoy_theme_setup');
+add_action('after_setup_theme', 'gabo_theme_setup');
 
 // Placing image caption in proper caption location
-add_action( 'add_attachment', 'hoy_attachment' );
-function hoy_attachment($id) {
+add_action( 'add_attachment', 'gabo_attachment' );
+function gabo_attachment($id) {
     /*
         title       post_title
         caption     post_excerpt
@@ -212,14 +208,14 @@ function expand_attachment_details() {
 add_action( 'admin_footer', 'expand_attachment_details' );
 
 // Set defaults for image media insertion
-function vivelohoy_insert_image_defaults() {
+function gabo_insert_image_defaults() {
 	// http://codex.wordpress.org/Option_Reference#Uncategorized
 	update_option( 'image_default_link_type', 'post' ); // 'post' means link to attachment page
 	update_option( 'image_default_size', 'large' );
 	update_option( 'large_size_w', 860 ); // should be same as $content_width
 	update_option( 'large_size_h', 600 );
 }
-add_action( 'after_setup_theme', 'vivelohoy_insert_image_defaults' );
+add_action( 'after_setup_theme', 'gabo_insert_image_defaults' );
 
 
 include_once('inc/relativetime.php');
@@ -230,10 +226,10 @@ include_once('inc/omniture.php');
 /**
  * Registers an image size for the post thumbnail
  */
-function hoy_thumb() {
+function gabo_thumb() {
 set_post_thumbnail_size( 300, 200, true );
 }
-add_action( 'after_setup_theme', 'hoy_thumb', 11 );
+add_action( 'after_setup_theme', 'gabo_thumb', 11 );
 
 /*
 Thank you! http://callmenick.com/2014/02/21/custom-wordpress-loop-with-pagination/
@@ -295,13 +291,13 @@ function custom_pagination($numpages = '', $pagerange = '', $paged='') {
 }
 
 // Overiding attachment image width
-function vivelohoy_content_width() {
+function gabo_content_width() {
   global $content_width;
 
   if ( is_attachment() )
     $content_width = 860;
 }
-add_action( 'template_redirect', 'vivelohoy_content_width', 11 );
+add_action( 'template_redirect', 'gabo_content_width', 11 );
 
 // Images to link to none by default, until we bring back the attachment page
 function default_image_upload_settings() {
@@ -333,7 +329,7 @@ function namespace_add_custom_types( $query ) {
 }
 add_filter( 'pre_get_posts', 'namespace_add_custom_types' );
 
-function hoy_twentythirteen_custom_header_setup() {
+function gabo_custom_header_setup() {
   $args = array(
     // Text color and image (empty to use none).
     'default-text-color'     => '',
@@ -351,4 +347,4 @@ function hoy_twentythirteen_custom_header_setup() {
 
   add_theme_support( 'custom-header', $args );
 }
-add_action( 'after_setup_theme', 'hoy_twentythirteen_custom_header_setup', 11 );
+add_action( 'after_setup_theme', 'gabo_custom_header_setup', 11 );
