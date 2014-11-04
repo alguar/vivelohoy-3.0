@@ -1,0 +1,29 @@
+{
+  "name": "twentythirteen-child",
+  "version": "0.0.1",
+  "homepage": "https://github.com/vivelohoy/vivelohoy-3.0",
+  "authors": [
+    "Nick Bennett <nbennett@vivelohoy.com> and Lucio Villa <lvilla@vivelohoy.com>"
+  ],
+  "description": "Vivelohoy 3.0 WordPress Theme",
+  "keywords": [
+    "wordpress",
+    "vivelohoy",
+    "theme"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jQuery.mmenu": "~4.3.4",
+    "imgLiquid": "~0.9.944",
+    "mediaCheck": "~0.4.5",
+    "unveil": "~1.3.0"
+  }
+}
