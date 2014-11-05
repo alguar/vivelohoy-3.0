@@ -7,8 +7,8 @@
  * @link http://codex.wordpress.org/Template_Hierarchy
  *
  * @package WordPress
- * @subpackage Twenty_Thirteen
- * @since Twenty Thirteen 1.0
+ * @subpackage Gabo
+ * @since Gabo 1.0
  */
 
 get_header('category'); ?>
@@ -35,13 +35,13 @@ get_header('category'); ?>
 			        }
 			?>
 
-		<?php else : ?>
-			<?php get_template_part( 'content', 'none' ); ?>
-		<?php endif; ?>
+			<?php else : ?>
+				<?php get_template_part( 'content', 'none' ); ?>
+			<?php endif; ?>
 
-<?php global $ADS_ENABLED; if ( $ADS_ENABLED ) : ?>	     
-			<div id="bottom-leaderboard" class="adslot leaderboard" data-width="728" data-height="90" data-pos="4"></div> 
-<?php endif; // End if ( $ADS_ENABLED ) ?>
+			<?php global $ADS_ENABLED; if ( $ADS_ENABLED ) : ?>
+						<div id="bottom-leaderboard" class="adslot leaderboard" data-width="728" data-height="90" data-pos="4"></div>
+			<?php endif; // End if ( $ADS_ENABLED ) ?>
 
 		</div><!-- #content -->
 	</div><!-- #primary -->
