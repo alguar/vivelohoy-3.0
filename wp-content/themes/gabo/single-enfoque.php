@@ -72,14 +72,6 @@ get_header('enfoque');
 
 					</article><!-- #post -->
 
-					<?php global $ADS_ENABLED; if ( $ADS_ENABLED ) : ?>	
-								<!-- BOTTOM LEADERBOARD AD -->
-								<?php if ( 'gallery' !== get_post_format() ) : // Anything but a gallery post type ?>
-									<div id="bottom-leaderboard" class="adslot leaderboard" data-width="728" data-height="90" data-pos="3"></div> 
-								<?php endif; // get_post_format() ?>
-								<!-- BOTTOM LEADERBOARD AD -->
-					<?php endif; // End if ( $ADS_ENABLED ) ?>
-
 					<script>
 					var is_gallery = <?php if ( 'gallery' === get_post_format() ) : ?>true<?php else: ?>false<?php endif; ?>;
 					</script>

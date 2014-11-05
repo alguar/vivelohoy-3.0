@@ -90,10 +90,5 @@ get_header('author'); ?>
 			<?php else : // If not have_posts() for the whole author page ?>
 				<?php get_template_part( 'content', 'none' ); ?>
 			<?php endif; // End if ( have_posts() ) for the whole author page ?>
-			<?php global $ADS_ENABLED; if ( $ADS_ENABLED ) : ?>
-			<!-- BOTTOM LEADERBOARD AD -->
-				<div id="bottom-leaderboard" class="adslot leaderboard" data-width="728" data-height="90" data-pos="4"></div>
-			<!-- BOTTOM LEADERBOARD AD -->
-			<?php endif; // End if ( $ADS_ENABLED ) ?>
 
 <?php get_footer(); ?>

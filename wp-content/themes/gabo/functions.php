@@ -1,13 +1,4 @@
 <?php
-global $ADS_ENABLED;
-$ADS_ENABLED = true;
-
-/*
-This determines which ptype is set in the JavaScript header files for Tribune AdOps ad
-insertion. These files are found in ./inc/ads/.
-*/
-$AD_TAG_DEV = false;
-
 /*
   $content_width is the width of our content as defined in style.css:
 
@@ -243,7 +234,6 @@ add_action( 'after_setup_theme', 'gabo_insert_image_defaults' );
 
 include_once('inc/relativetime.php');
 include_once('inc/utils.php');
-include_once('inc/ads.php');
 include_once('inc/omniture.php');
 
 /**

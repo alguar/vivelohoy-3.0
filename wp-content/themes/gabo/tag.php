@@ -39,10 +39,6 @@ get_header('category'); ?>
 				<?php get_template_part( 'content', 'none' ); ?>
 			<?php endif; ?>
 
-			<?php global $ADS_ENABLED; if ( $ADS_ENABLED ) : ?>
-						<div id="bottom-leaderboard" class="adslot leaderboard" data-width="728" data-height="90" data-pos="4"></div>
-			<?php endif; // End if ( $ADS_ENABLED ) ?>
-
 		</div><!-- #content -->
 	</div><!-- #primary -->
 

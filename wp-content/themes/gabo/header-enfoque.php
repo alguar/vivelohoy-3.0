@@ -39,15 +39,6 @@
 	<script src="<?php echo get_template_directory_uri(); ?>/js/html5.js"></script>
 	<![endif]-->
 	<?php wp_head(); ?>
-<?php global $ADS_ENABLED; if ( $ADS_ENABLED ) : ?>
-	<?php
-		if ( 'gallery' !== get_post_format() ) {
-			print_ad_script("story");
-		} else {
-			print_ad_script("photo gallery");
-		}
-	?>
-<?php endif; // End if ( $ADS_ENABLED ) ?>
 </head>
 
 <body <?php body_class(); ?>>
