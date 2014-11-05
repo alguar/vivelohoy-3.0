@@ -8,7 +8,6 @@ get_header('patrocinado');
 
 ?>
 
-
 			<div class="boxSep" style="margin-top: 52px">
     			<div class="imgLiquidFill imgLiquid">
 
@@ -21,7 +20,7 @@ get_header('patrocinado');
 						<div class="post-in-loop">
 							<h1 class="enfoque-title"><?php echo get_the_title(); ?></h1>
 							<div class="enfoque-author-link">
-						        Por <a target="_blank" href="<?php echo esc_url( the_author_meta( 'user_url' ) ); ?>">
+						        By <a target="_blank" href="<?php echo esc_url( the_author_meta( 'user_url' ) ); ?>">
 						            <?php echo get_author_name( get_the_author_meta( 'ID' ) ); ?>
 						        </a>
 						    </div>
@@ -48,8 +47,6 @@ get_header('patrocinado');
 				</div>
 
 			</div>
-
-
 
 			<div id="primary" class="content-area">
 				<div id="content" class="site-content" role="main">
