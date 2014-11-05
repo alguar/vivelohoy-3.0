@@ -83,18 +83,18 @@ function gabo_post_nav() {
 		return;
 	?>
 	<nav class="navigation post-navigation" role="navigation">
-		<h1 class="screen-reader-text"><?php _e( 'Post navigation', 'twentythirteen-child' ); ?></h1>
+		<h1 class="screen-reader-text"><?php _e( 'Post navigation', 'gabo' ); ?></h1>
 		<div class="nav-links">
 
-			<?php previous_post_link( '%link', _x( '<span class="meta-nav">&larr;</span> %title', 'Previous post link', 'twentythirteen-child' ) ); ?>
-			<?php next_post_link( '%link', _x( '%title <span class="meta-nav">&rarr;</span>', 'Next post link', 'twentythirteen-child' ) ); ?>
+			<?php previous_post_link( '%link', _x( '<span class="meta-nav">&larr;</span> %title', 'Previous post link', 'gabo' ) ); ?>
+			<?php next_post_link( '%link', _x( '%title <span class="meta-nav">&rarr;</span>', 'Next post link', 'gabo' ) ); ?>
 
 		</div><!-- .nav-links -->
 	</nav><!-- .navigation -->
 	<?php
 }
 /**
- * Overiding paging_nav function
+ * Overriding paging_nav function
  */
 
 function gabo_paging_nav() {
@@ -105,15 +105,15 @@ function gabo_paging_nav() {
 		return;
 	?>
 	<nav class="navigation paging-navigation" role="navigation">
-		<h1 class="screen-reader-text"><?php _e( 'Posts navigation', 'twentythirteen-child' ); ?></h1>
+		<h1 class="screen-reader-text"><?php _e( 'Posts navigation', 'gabo' ); ?></h1>
 		<div class="nav-links">
 
 			<?php if ( get_next_posts_link() ) : ?>
-			<div class="nav-previous"><?php next_posts_link( __( '<span class="meta-nav">&larr;</span> Older posts', 'twentythirteen-child' ) ); ?></div>
+			<div class="nav-previous"><?php next_posts_link( __( '<span class="meta-nav">&larr;</span> Older posts', 'gabo' ) ); ?></div>
 			<?php endif; ?>
 
 			<?php if ( get_previous_posts_link() ) : ?>
-			<div class="nav-next"><?php previous_posts_link( __( 'Newer posts <span class="meta-nav">&rarr;</span>', 'twentythirteen-child' ) ); ?></div>
+			<div class="nav-next"><?php previous_posts_link( __( 'Newer posts <span class="meta-nav">&rarr;</span>', 'gabo' ) ); ?></div>
 			<?php endif; ?>
 
 		</div><!-- .nav-links -->
@@ -169,7 +169,30 @@ add_action( 'init', 'my_theme_add_editor_styles' );
 
 // Add support of other languages
 function gabo_theme_setup(){
-    load_theme_textdomain('gabo', get_stylesheet_directory() . '/languages');
+  load_theme_textdomain('gabo', get_stylesheet_directory() . '/languages');
+  // This theme uses its own gallery styles.
+  add_filter( 'use_default_gallery_style', '__return_false' );
+
+  /*
+   * This theme styles the visual editor to resemble the theme style,
+   * specifically font, colors, icons, and column width.
+   */
+  add_editor_style( array( 'css/editor-style.css', 'fonts/genericons.css', twentythirteen_fonts_url() ) );
+
+  // Adds RSS feed links to <head> for posts and comments.
+  add_theme_support( 'automatic-feed-links' );
+
+  /*
+   * Switches default core markup for search form, comment form,
+   * and comments to output valid HTML5.
+   */
+  add_theme_support( 'html5', array(
+    'search-form', 'comment-form', 'comment-list', 'gallery', 'caption'
+  ) );
+
+
+  // This theme uses wp_nav_menu() in one location.
+  register_nav_menu( 'primary', __( 'Navigation Menu', 'twentythirteen' ) );
 }
 add_action('after_setup_theme', 'gabo_theme_setup');
 
@@ -227,7 +250,8 @@ include_once('inc/omniture.php');
  * Registers an image size for the post thumbnail
  */
 function gabo_thumb() {
-set_post_thumbnail_size( 300, 200, true );
+    add_theme_support( 'post-thumbnails' );
+    set_post_thumbnail_size( 300, 200, true );
 }
 add_action( 'after_setup_theme', 'gabo_thumb', 11 );
 
@@ -329,22 +353,117 @@ function namespace_add_custom_types( $query ) {
 }
 add_filter( 'pre_get_posts', 'namespace_add_custom_types' );
 
-function gabo_custom_header_setup() {
-  $args = array(
-    // Text color and image (empty to use none).
-    'default-text-color'     => '',
-    'default-image'          => '',
 
-    // Set height and width, with a maximum value for the width.
-    'height'                 => 230,
-    'width'                  => 1600,
+/****
 
-    // Callbacks for styling the header and the admin preview.
-    'wp-head-callback'       => 'twentythirteen_header_style',
-    'admin-head-callback'    => 'twentythirteen_admin_header_style',
-    'admin-preview-callback' => 'twentythirteen_admin_header_image',
-  );
+twentythirteen carry-overs
 
-  add_theme_support( 'custom-header', $args );
+****/
+
+/**
+ * Filter the page title.
+ *
+ * Creates a nicely formatted and more specific title element text for output
+ * in head of document, based on current view.
+ *
+ * @param string $title Default title text for current view.
+ * @param string $sep   Optional separator.
+ * @return string The filtered title.
+ */
+function gabo_wp_title( $title, $sep ) {
+  global $paged, $page;
+
+  if ( is_feed() )
+    return $title;
+
+  // Add the site name.
+  $title .= get_bloginfo( 'name', 'display' );
+
+  // Add the site description for the home/front page.
+  $site_description = get_bloginfo( 'description', 'display' );
+  if ( $site_description && ( is_home() || is_front_page() ) )
+    $title = "$title $sep $site_description";
+
+  // Add a page number if necessary.
+  if ( ( $paged >= 2 || $page >= 2 ) && ! is_404() )
+    $title = "$title $sep " . sprintf( __( 'Page %s', 'gabo' ), max( $paged, $page ) );
+
+  return $title;
 }
-add_action( 'after_setup_theme', 'gabo_custom_header_setup', 11 );
+add_filter( 'wp_title', 'gabo_wp_title', 10, 2 );
+
+/**
+ * Return the Google font stylesheet URL, if available.
+ *
+ * The use of Source Sans Pro and Bitter by default is localized. For languages
+ * that use characters not supported by the font, the font can be disabled.
+ *
+ * @since Twenty Thirteen 1.0
+ *
+ * @return string Font stylesheet or empty string if disabled.
+ */
+function twentythirteen_fonts_url() {
+  $fonts_url = '';
+
+  /* Translators: If there are characters in your language that are not
+   * supported by Source Sans Pro, translate this to 'off'. Do not translate
+   * into your own language.
+   */
+  $source_sans_pro = _x( 'on', 'Source Sans Pro font: on or off', 'twentythirteen' );
+
+  /* Translators: If there are characters in your language that are not
+   * supported by Bitter, translate this to 'off'. Do not translate into your
+   * own language.
+   */
+  $bitter = _x( 'on', 'Bitter font: on or off', 'twentythirteen' );
+
+  if ( 'off' !== $source_sans_pro || 'off' !== $bitter ) {
+    $font_families = array();
+
+    if ( 'off' !== $source_sans_pro )
+      $font_families[] = 'Source Sans Pro:300,400,700,300italic,400italic,700italic';
+
+    if ( 'off' !== $bitter )
+      $font_families[] = 'Bitter:400,700';
+
+    $query_args = array(
+      'family' => urlencode( implode( '|', $font_families ) ),
+      'subset' => urlencode( 'latin,latin-ext' ),
+    );
+    $fonts_url = add_query_arg( $query_args, "//fonts.googleapis.com/css" );
+  }
+
+  return $fonts_url;
+}
+
+/**
+ * Enqueue scripts and styles for the front end.
+ *
+ * @since Twenty Thirteen 1.0
+ */
+function twentythirteen_scripts_styles() {
+  /*
+   * Adds JavaScript to pages with the comment form to support
+   * sites with threaded comments (when in use).
+   */
+  if ( is_singular() && comments_open() && get_option( 'thread_comments' ) )
+    wp_enqueue_script( 'comment-reply' );
+
+  // Adds Masonry to handle vertical alignment of footer widgets.
+  if ( is_active_sidebar( 'sidebar-1' ) )
+    wp_enqueue_script( 'jquery-masonry' );
+
+  // Loads JavaScript file with functionality specific to Twenty Thirteen.
+  wp_enqueue_script( 'twentythirteen-script', get_template_directory_uri() . '/js/functions.js', array( 'jquery' ), '2014-06-08', true );
+
+  // Add Source Sans Pro and Bitter fonts, used in the main stylesheet.
+  wp_enqueue_style( 'twentythirteen-fonts', twentythirteen_fonts_url(), array(), null );
+
+  // Loads our main stylesheet.
+  wp_enqueue_style( 'twentythirteen-style', get_stylesheet_uri(), array(), '2013-07-18' );
+
+  // Loads the Internet Explorer specific stylesheet.
+  wp_enqueue_style( 'twentythirteen-ie', get_template_directory_uri() . '/css/ie.css', array( 'twentythirteen-style' ), '2013-07-18' );
+  wp_style_add_data( 'twentythirteen-ie', 'conditional', 'lt IE 9' );
+}
+add_action( 'wp_enqueue_scripts', 'twentythirteen_scripts_styles' );
