@@ -3,8 +3,8 @@
  * The template for displaying posts in the Gallery post format
  *
  * @package WordPress
- * @subpackage Twenty_Thirteen
- * @since Twenty Thirteen 1.0
+ * @subpackage Gabo
+ * @since Gabo 1.0
  */
 ?>
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
@@ -17,18 +17,18 @@
 		</h1>
 		<?php endif; // is_single() ?>
 		<div class="author-cat" style="margin:0">
-			
-					Por <?php the_author_posts_link(); ?> en <?php $category = get_the_category(); if($category[0]){ echo '<a href="'.get_category_link($category[0]->term_id ).'">'.$category[0]->cat_name.'</a>'; } ?> <?php the_time('m/j/y g:i A') ?>
-				
-				<?php edit_post_link( __( 'Edit', 'twentythirteen-child' ), '<span class="edit-link">', '</span>' ); ?>
-			
+
+					By <?php the_author_posts_link(); ?> in <?php $category = get_the_category(); if($category[0]){ echo '<a href="'.get_category_link($category[0]->term_id ).'">'.$category[0]->cat_name.'</a>'; } ?> <?php the_time('m/j/y g:i A') ?>
+
+				<?php edit_post_link( __( 'Edit', 'gabo' ), '<span class="edit-link">', '</span>' ); ?>
+
 		</div>
 	</header><!-- .entry-header -->
 
 	<div class="entry-content">
 		<?php if ( is_single() || ! get_post_gallery() ) : ?>
-			<?php the_content( __( 'Continue reading <span class="meta-nav">&rarr;</span>', 'twentythirteen-child' ) ); ?>
-			<?php wp_link_pages( array( 'before' => '<div class="page-links"><span class="page-links-title">' . __( 'Pages:', 'twentythirteen-child' ) . '</span>', 'after' => '</div>', 'link_before' => '<span>', 'link_after' => '</span>' ) ); ?>
+			<?php the_content( __( 'Continue reading <span class="meta-nav">&rarr;</span>', 'gabo' ) ); ?>
+			<?php wp_link_pages( array( 'before' => '<div class="page-links"><span class="page-links-title">' . __( 'Pages:', 'gabo' ) . '</span>', 'after' => '</div>', 'link_before' => '<span>', 'link_after' => '</span>' ) ); ?>
 		<?php else : ?>
 			<?php echo get_post_gallery(); ?>
 		<?php endif; // is_single() ?>
