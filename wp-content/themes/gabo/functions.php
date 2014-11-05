@@ -234,7 +234,6 @@ add_action( 'after_setup_theme', 'gabo_insert_image_defaults' );
 
 include_once('inc/relativetime.php');
 include_once('inc/utils.php');
-include_once('inc/omniture.php');
 
 /**
  * Registers an image size for the post thumbnail
