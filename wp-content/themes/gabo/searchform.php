@@ -12,8 +12,8 @@
 <div id="search">
 	<form style="max-width: 180px" role="search" method="get" class="search-form" action="<?php echo home_url( '/' ); ?>">
 		<label>
-			<span class="screen-reader-text">Buscar:</span>
-			<input type="search" placeholder="Buscar…" value="" name="s" title="Buscar:" />
+			<span class="screen-reader-text"><?php _e( 'Search', 'gabo' ); ?>:</span>
+			<input type="search" placeholder="<?php _e( 'Search', 'gabo' ); ?>…" value="" name="s" title="<?php _e( 'Search', 'gabo' ); ?>:" />
 		</label>
 	</form>
 </div>
