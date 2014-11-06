@@ -20,7 +20,7 @@ get_header('enfoque');
 						<div class="post-in-loop">
 							<h1 class="enfoque-title"><?php echo get_the_title(); ?></h1>
 							<div class="enfoque-author-link">
-						        <?php _e( 'By ', 'gabo'); ?> <a href="<?php echo esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ); ?>">
+						        <?php _e( 'By ', 'gabo'); ?><a href="<?php echo esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ); ?>">
 						            <?php echo get_author_name( get_the_author_meta( 'ID' ) ); ?>
 						        </a>
 						    </div>
@@ -28,7 +28,7 @@ get_header('enfoque');
 						        <?php
 						            $category = get_the_category();
 						            if ( $category[0] ) { ?>
-						                <span class="category-en"><?php _e( 'in ', 'gabo'); ?> </span>
+						                <span class="category-en"><?php _e( 'in ', 'gabo'); ?></span>
 						                <a href="<?php echo get_category_link( $category[0]->term_id ); ?>">
 						                    <?php echo $category[0]->cat_name; ?>
 						                </a><?php
@@ -47,7 +47,7 @@ get_header('enfoque');
 				</div>
 
     			<div style="position: absolute; width: 100%; text-align: right; padding-right: 10px;">
-    				<p style="color:#000; font-size:15px; font-family: 'Helvetica', Helvetica, Arial, 'Lucida Grande', sans-serif">Foto por <a href="<?php the_field('photo_link'); ?>" target="_blank"><?php the_field('photo_byline'); ?></a></p>
+    				<p style="color:#000; font-size:15px; font-family: 'Helvetica', Helvetica, Arial, 'Lucida Grande', sans-serif"><?php _e( 'Photo by ', 'gabo' ); ?><a href="<?php the_field('photo_link'); ?>" target="_blank"><?php the_field('photo_byline'); ?></a></p>
     			</div>
 
 			</div>
