@@ -2,9 +2,6 @@
 /**
  * The template for displaying 404 pages (Not Found)
  *
- * @package WordPress
- * @subpackage Gabo
- * @since Gabo 1.0
  */
 
 get_header(); ?>
@@ -18,8 +15,8 @@ get_header(); ?>
 					<p style="margin: 0 0 5px 0; padding:0 10px"><?php _e( 'It looks like nothing was found at this location. Maybe try a search?', 'gabo' ); ?></p>
 					<form role="search" method="get" class="search-form" action="http://vagrant.dev/">
 						<label>
-							<span class="screen-reader-text">Buscar:</span>
-							<input type="search" class="search-field" placeholder="Buscar…" value="" name="s" title="Buscar:">
+							<span class="screen-reader-text"><?php _e( 'Search', 'gabo' ); ?>:</span>
+							<input type="search" class="search-field" placeholder="<?php _e( 'Search', 'gabo' ); ?>…" value="" name="s" title="<?php _e( 'Search', 'gabo' ); ?>:">
 						</label>
 					</form>
 
