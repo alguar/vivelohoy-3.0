@@ -20,7 +20,7 @@ get_header('patrocinado');
 						<div class="post-in-loop">
 							<h1 class="enfoque-title"><?php echo get_the_title(); ?></h1>
 							<div class="enfoque-author-link">
-						        By <a target="_blank" href="<?php echo esc_url( the_author_meta( 'user_url' ) ); ?>">
+						        <?php _e( 'By ', 'gabo'); ?><a target="_blank" href="<?php echo esc_url( the_author_meta( 'user_url' ) ); ?>">
 						            <?php echo get_author_name( get_the_author_meta( 'ID' ) ); ?>
 						        </a>
 						    </div>
@@ -28,7 +28,7 @@ get_header('patrocinado');
 						        <?php
 						            $category = get_the_category();
 						            if ( $category[0] ) { ?>
-						                <span class="category-en">en </span>
+						                <span class="category-en"><?php _e( 'in ', 'gabo'); ?></span>
 						                <a href="<?php echo get_category_link( $category[0]->term_id ); ?>">
 						                    <?php echo $category[0]->cat_name; ?>
 						                </a><?php
