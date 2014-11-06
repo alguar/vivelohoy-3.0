@@ -2,9 +2,6 @@
 /**
  * The template for displaying Search Results pages
  *
- * @package WordPress
- * @subpackage Twenty_Thirteen
- * @since Twenty Thirteen 1.0
  */
 
 get_header('home'); ?>
@@ -15,7 +12,7 @@ get_header('home'); ?>
 		<?php if ( have_posts() ) : ?>
 
 			<header class="page-header">
-				<h2><?php printf( __( 'Search Results for: %s', 'twentythirteen-child' ), get_search_query() ); ?></h2>
+				<h2><?php printf( __( 'Search Results for: %s', 'gabo' ), get_search_query() ); ?></h2>
 				<hr>
 			</header>
 
